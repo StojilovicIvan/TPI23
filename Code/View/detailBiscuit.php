@@ -4,7 +4,6 @@ $title = 'detailBiscuit';
 
 ob_start();
 ?>
-
 <div class="detail">
     <div class="detail-grid">
         <div id="detailImg">
@@ -13,7 +12,7 @@ ob_start();
         <div>
             <h2><?=$detail['name']; ?></h2>
             <h2><?=$detail['price']; ?> CHF</h2>
-            <h3><button>Ajouter au panier</button></h3>
+            <h3><a href="action=addToCart?id=<?=$detail['id']; ?>"><button>Ajouter au panier</button></a></h3>
         </div>
     </div>
     <div class="detail-grid" id="info">

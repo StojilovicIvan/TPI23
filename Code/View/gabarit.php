@@ -67,12 +67,19 @@
                         <ul>
                             <li><a href="index.php?action=home">Home</a></li>
                             <li><a href="index.php?action=shop">Boutique</a></li>
+                            <?php if(isset($_SESSION['email'])): ?>
+                                <li><a href="index.php?action=logout">Déconnexion / <?= $_SESSION['email'] ?></a></li>
+                            <?php elseif(!isset($_SESSION['email'])): ?>
+                                <li><a href="index.php?action=register">Inscription</a></li>
+                                <li><a href="index.php?action=login">Connexion</a></li>
+                            <?php endif; ?>
                             <li>
                                 <div class="header-icons">
-                                    <a class="shopping-cart" href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                                    <a class="shopping-cart" href="index.php?action=cart"><i class="fas fa-shopping-cart"></i></a>
                                     <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                                 </div>
                             </li>
+
                         </ul>
                     </nav>
                     <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
@@ -110,7 +117,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                    <p>Fresh and Organic</p>
+                    <p>E-Biscuits</p>
                     <h1>Shop</h1>
                 </div>
             </div>

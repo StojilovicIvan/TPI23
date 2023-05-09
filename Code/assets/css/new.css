@@ -38,3 +38,15 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
 }
+
+#form-register{
+    margin-bottom: 40px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+#form-login{
+    margin-bottom: 40px;
+    margin-top: 40px;
+    text-align: center;
+}

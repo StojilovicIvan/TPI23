@@ -17,6 +17,26 @@ if (isset($_GET['action'])) {
             require "controler/biscuits.php";
             detailBiscuit($_GET['id']);
             break;
+        case 'register' :
+            require "controler/users.php";
+            register($_POST);
+            break;
+        case 'login' :
+            require "controler/users.php";
+            login($_POST);
+            break;
+        case 'logout' :
+            require "controler/users.php";
+            logout();
+            break;
+        case 'cart' :
+            require "controler/navigation.php";
+            cart();
+            break;
+        case 'addToCart' :
+            require "controler/biscuits.php";
+            addToCart($_POST);
+            break;
         default :
             require "controler/navigation.php";
             lost();

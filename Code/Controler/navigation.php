@@ -11,3 +11,7 @@ function shop(){
     $biscuits = databaseToShop();
     require "view/shop.php";
 }
+
+function cart(){
+    require "view/cart.php";
+}
