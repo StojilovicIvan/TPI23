@@ -73,3 +73,41 @@ function logout()
     session_destroy();
     require "view/home.php";
 }
+
+function profil(){
+    require_once "model/userManagement.php";
+    $userDetails = getUsers();
+
+    foreach ($userDetails as $userDetail) {
+        if ($userDetail['email'] == $_SESSION['email']){
+            $detail = $userDetail;
+        }
+    }
+
+    $id = $detail['id'];
+
+    $allergies = getAllergies($id);
+
+    require "view/profil.php";
+}
+
+function modifUserForm(){
+    require "model/userManagement.php";
+    $userDetails = getUsers();
+
+    foreach ($userDetails as $userDetail) {
+        if ($userDetail['email'] == $_SESSION['email']){
+            $detail = $userDetail;
+        }
+    }
+
+    require "view/modifProfil.php";
+}
+
+function modifUser($modifRequest){
+    require "model/userManagement.php";
+    userDetailToDatabase($modifRequest);
+    profil();
+    require "view/profil.php";
+}
+

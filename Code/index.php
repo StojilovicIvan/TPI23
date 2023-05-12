@@ -35,7 +35,19 @@ if (isset($_GET['action'])) {
             break;
         case 'addToCart' :
             require "controler/biscuits.php";
-            addToCart($_POST);
+            addToCart();
+            break;
+        case 'profil' :
+            require "controler/users.php";
+            profil();
+            break;
+        case 'modifUserForm' :
+            require "controler/users.php";
+            modifUserForm();
+            break;
+        case 'modifUser' :
+            require "controler/users.php";
+            modifUser($_POST);
             break;
         default :
             require "controler/navigation.php";

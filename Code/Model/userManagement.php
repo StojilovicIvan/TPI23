@@ -9,6 +9,20 @@ function getUsers(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getAllergies($id){
+    require_once "data/dbconnector.php";
+
+    $pdo = dbConnect();
+
+
+    $stmt =$pdo->query("SELECT name
+                                FROM allergy
+                                LEFT JOIN users_has_allergy ON users_has_allergy.allergy_id = allergy.id
+                                LEFT JOIN users ON users_has_allergy.users_id = users.id
+                                WHERE users.id = $id");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function addUser($data){
     require_once "data/dbconnector.php";
 
@@ -84,5 +98,36 @@ function isLoginCorrect($userEmail, $userPassword){
     }
 
     return $result;
+
+}
+
+function userDetailToDatabase($data){
+
+    require_once "data/dbconnector.php";
+
+    $pdo = dbConnect();
+
+    $lastname = $data['lastname'];
+    $firstname = $data['firstname'];
+    $street = $data['street'];
+    $number = $data['number'];
+    $postalCode = $data['postalCode'];
+    $city = $data['city'];
+    $phoneNumber = $data['phoneNumber'];
+    $email = $_SESSION['email'];
+
+    $stmt =$pdo->prepare('UPDATE users 
+                                SET lastname = :lastname, firstname = :firstname, street = :street, number = :number, postalCode = :postalCode, city = :city, phoneNumber = :phoneNumber
+                                WHERE email = :email');
+
+    $stmt->bindParam(':lastname', $lastname);
+    $stmt->bindParam(':firstname', $firstname);
+    $stmt->bindParam(':street', $street);
+    $stmt->bindParam(':number', $number);
+    $stmt->bindParam(':postalCode', $postalCode);
+    $stmt->bindParam(':city', $city);
+    $stmt->bindParam(':phoneNumber', $phoneNumber);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
 
 }

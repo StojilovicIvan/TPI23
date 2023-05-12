@@ -14,18 +14,24 @@ function detailBiscuit($id){
 
 }
 
-function addToCart($id){
+function addToCart(){
+
     if(!isset($_SESSION['panier'])){
         $_SESSION['panier'] = array();
     }
-
-    $biscuitID = $id;
-
-    if(isset($_SESSION['panier'][$biscuitID])){
-        $_SESSION['panier'][$biscuitID]++;
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+    }
+    if(isset($_SESSION['panier'][$id])){
+        $_SESSION['panier'][$id] ++;
     }
     else{
-        $_SESSION['panier'][$biscuitID]+1;
+        $_SESSION['panier'][$id] = 1;
     }
 
+    require "view/home.php";
+
+    //header("Location:view/cart.php");
+
 }
+

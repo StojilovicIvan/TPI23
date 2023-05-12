@@ -68,6 +68,7 @@
                             <li><a href="index.php?action=home">Home</a></li>
                             <li><a href="index.php?action=shop">Boutique</a></li>
                             <?php if(isset($_SESSION['email'])): ?>
+                                <li><a href="index.php?action=profil">Mon profil</a></li>
                                 <li><a href="index.php?action=logout">Déconnexion / <?= $_SESSION['email'] ?></a></li>
                             <?php elseif(!isset($_SESSION['email'])): ?>
                                 <li><a href="index.php?action=register">Inscription</a></li>
