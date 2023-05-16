@@ -37,6 +37,10 @@ if (isset($_GET['action'])) {
             require "controler/biscuits.php";
             addToCart();
             break;
+        case 'validCart' :
+            require "controler/biscuits.php";
+            validCart();
+            break;
         case 'profil' :
             require "controler/users.php";
             profil();
@@ -48,6 +52,34 @@ if (isset($_GET['action'])) {
         case 'modifUser' :
             require "controler/users.php";
             modifUser($_POST);
+            break;
+        case 'order' :
+            require "controler/users.php";
+            order();
+            break;
+        case 'adminPage' :
+            require "controler/users.php";
+            adminPage();
+            break;
+        case 'formBiscuit' :
+            require "controler/biscuits.php";
+            formBiscuit();
+            break;
+        case 'addBiscuit' :
+            require "controler/biscuits.php";
+            addBiscuit($_POST);
+            break;
+        case 'formModifBiscuit' :
+            require "controler/biscuits.php";
+            formModifBiscuit($_GET['id']);
+            break;
+        case 'modifyBiscuit' :
+            require "controler/biscuits.php";
+            modifyBiscuit($_POST);
+            break;
+        case 'deleteBiscuit' :
+            require "controler/biscuits.php";
+            deleteBiscuit($_POST);
             break;
         default :
             require "controler/navigation.php";

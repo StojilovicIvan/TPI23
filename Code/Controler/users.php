@@ -53,11 +53,12 @@ function login($loginRequest){
                 require "view/home.php";
             }
             else {
-                $loginErrorMessage = "L'identifiant et/ou le mot ne passe sont incorrectes";
+                $loginErrorMessage = "L'identifiant et/ou le mot de passe sont incorrectes";
                 require "view/login.php";
             }
         }
         else{
+            $loginErrorMessage = null;
             require "view/login.php";
         }
     }
@@ -111,3 +112,12 @@ function modifUser($modifRequest){
     require "view/profil.php";
 }
 
+function order(){
+    require "view/orderList.php";
+}
+
+function adminPage(){
+    require "model/biscuitManagement.php";
+    $biscuits = databaseToAdmin();
+    require "view/adminPage.php";
+}

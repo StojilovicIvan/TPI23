@@ -20,6 +20,9 @@ ob_start();
                 <input class="input" type="password" id="password" name="password">
             </div>
             <div>
+                <?=$loginErrorMessage?>
+            </div>
+            <div>
                 <button class="button" type="submit">Se connecter</button>
             </div>
         </form>

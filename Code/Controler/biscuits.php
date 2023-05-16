@@ -28,10 +28,46 @@ function addToCart(){
     else{
         $_SESSION['panier'][$id] = 1;
     }
+    require "model/biscuitManagement.php";
+    $biscuits = databaseToShop();
+    require "view/shop.php";
 
-    require "view/home.php";
+}
 
-    //header("Location:view/cart.php");
+function validCart(){
+
+}
+
+function formBiscuit(){
+    require "view/formBiscuit.php";
+}
+
+function addBiscuit($data){
+    require "model/biscuitManagement.php";
+    biscuitToDatabase($data);
+    $biscuits = databaseToAdmin();
+    require "view/adminPage.php";
+}
+
+function formModifBiscuit($data){
+    require "model/biscuitManagement.php";
+    $biscuits = databaseToAdmin();
+    foreach ($biscuits as $detailBiscuit) {
+        if ($detailBiscuit['id'] == $data){
+            $biscuit = $detailBiscuit;
+        }
+    }
+    require "view/modifBiscuit.php";
+}
+
+function modifyBiscuit($data){
+    require "model/biscuitManagement.php";
+    updateBiscuit($data);
+    $biscuits = databaseToAdmin();
+    require "view/adminPage.php";
+}
+
+function deleteBiscuit(){
 
 }
 

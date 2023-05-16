@@ -26,7 +26,8 @@ ob_start();
             <a><?=$allergy['name']; ?></a><br>
         <?php endforeach; ?>
     </div>
-    <a href="index.php?action=modifUserForm"><button>Modifier les informations</button></a>
+    <a href="index.php?action=modifUserForm"><button>Modifier les informations</button></a><br><br>
+    <!--<a href="index.php?action=order"><button>Afficher mes commandes</button></a>-->
 </div>
 
 <?php

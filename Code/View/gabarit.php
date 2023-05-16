@@ -56,8 +56,8 @@
                 <div class="main-menu-wrap">
                     <!-- logo -->
                     <div class="site-logo">
-                        <a href="index.html">
-                            <img src="assets/img/logo.png" alt="">
+                        <a href="index.php?action=home">
+                            <img src="assets/img/" alt="" >
                         </a>
                     </div>
                     <!-- logo -->
@@ -70,14 +70,17 @@
                             <?php if(isset($_SESSION['email'])): ?>
                                 <li><a href="index.php?action=profil">Mon profil</a></li>
                                 <li><a href="index.php?action=logout">Déconnexion / <?= $_SESSION['email'] ?></a></li>
+                                <li><a href="index.php?action=adminPage">Administration</a></li>
+                                <li><a class="shopping-cart" href="index.php?action=cart"><i class="fas fa-shopping-cart"></i></a></li>
                             <?php elseif(!isset($_SESSION['email'])): ?>
                                 <li><a href="index.php?action=register">Inscription</a></li>
                                 <li><a href="index.php?action=login">Connexion</a></li>
                             <?php endif; ?>
+
                             <li>
                                 <div class="header-icons">
-                                    <a class="shopping-cart" href="index.php?action=cart"><i class="fas fa-shopping-cart"></i></a>
-                                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+
+                                    <!--<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>-->
                                 </div>
                             </li>
 
@@ -138,21 +141,21 @@
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="footer-box about-widget">
-                    <h2 class="widget-title">About us</h2>
-                    <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                    <h2 class="widget-title">A propos de nous</h2>
+                    <p>Nous sommes une boutique en ligne de vente de biscuits fait par nos propres soins.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="footer-box get-in-touch">
-                    <h2 class="widget-title">Get in Touch</h2>
+                    <h2 class="widget-title">Contact</h2>
                     <ul>
-                        <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                        <li>support@fruitkha.com</li>
-                        <li>+00 111 222 3333</li>
+                        <li>Avenue de la Gare 14,<br> 1450 Sainte-Croix</li>
+                        <li>support@ebiscuits.com</li>
+                        <li>+41 78 152 48 36</li>
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <!--<div class="col-lg-3 col-md-6">
                 <div class="footer-box pages">
                     <h2 class="widget-title">Pages</h2>
                     <ul>
@@ -173,7 +176,7 @@
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
@@ -188,7 +191,7 @@
                     Distributed By - <a href="https://themewagon.com/">Themewagon</a>
                 </p>
             </div>
-            <div class="col-lg-6 text-right col-md-12">
+            <!--<div class="col-lg-6 text-right col-md-12">
                 <div class="social-icons">
                     <ul>
                         <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
@@ -198,7 +201,7 @@
                         <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
                     </ul>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
