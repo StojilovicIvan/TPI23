@@ -31,23 +31,23 @@ else{
 
         foreach($produits as $produit):
             ?>
-            <div id="cartList">
+            <div id="cart-list">
                 <ul>
-                    <li class="listBiscuit"><img src="image\cookie.jpg" height="100px"></li>
-                    <li class="listBiscuit">Nom : <?=$produit['name']?></li>
-                    <li class="listBiscuit">Prix unitaire : <?=$produit['price']?> CHF</li>
-                    <li class="listBiscuit">Quantité : <?=$produit['quantity']?></li>
+                    <li class="list-biscuit"><img src="image\cookie.jpg" height="100px"></li>
+                    <li class="list-biscuit">Nom : <?=$produit['name']?></li>
+                    <li class="list-biscuit">Prix unitaire : <?=$produit['price']?> CHF</li>
+                    <li class="list-biscuit">Quantité : <?=$produit['quantity']?></li>
                     <!--<li class="listBiscuit">
                         <button>+</button>
                         <button>-</button>
                     </li>-->
-                    <li class="listBiscuit">Prix total : <?=$produit['price'] * $produit['quantity']?> CHF</li>
+                    <li class="list-biscuit">Prix total : <?=$produit['price'] * $produit['quantity']?> CHF</li>
                     <?php $total += $produit['price'] * $produit['quantity'] ?>
                 </ul>
             </div>
 
         <?php endforeach ; } ?>
-    <div id="cartFooter">
+    <div id="cart-footer">
         <a href="index.php?action=validCart">Prix total : <?=$total ?> CHF <button>Valider la commande</button></a>
         <p></p>
     </div>

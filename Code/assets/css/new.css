@@ -57,36 +57,31 @@
     text-align: center;
 }
 
-#cartList{
+#cart-list{
     margin-bottom: 40px;
     margin-top: 40px;
     margin-left: 20%;
     font-size: 20px;
 }
 
-.listBiscuit{
+.list-biscuit{
     display: inline-block;
     margin-right: 50px;
 }
 
-#cartFooter{
+#cart-footer{
     text-align: center;
     font-size: 20px;
     margin-bottom: 40px;
 }
 
-.cartButton{
-    height: 40px;
-    width: 40px;
-}
-
-#adminList{
+#admin-list{
     margin-bottom: 40px;
     margin-top: 40px;
     margin-left: 15%;
 }
 
-.adminBiscuit{
+.admin-biscuit{
     display: inline-block;
     margin-right: 50px;
     font-size: 20px;
@@ -97,15 +92,17 @@
     text-align: center;
 }
 
-.orderList{
+.order-style{
     display: inline-block;
     margin-right: 50px;
     font-size: 20px;
 }
-.orderListTitre{
+.order-style-title{
     display: inline-block;
     margin-right: 30px;
     font-size: 20px;
 }
+
+
 
 

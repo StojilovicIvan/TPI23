@@ -77,9 +77,13 @@ if (isset($_GET['action'])) {
             require "controler/biscuits.php";
             modifyBiscuit($_POST);
             break;
-        case 'deleteBiscuit' :
+        case 'disableBiscuit' :
             require "controler/biscuits.php";
-            deleteBiscuit($_POST);
+            disableBiscuit($_GET['id']);
+            break;
+        case 'enableBiscuit' :
+            require "controler/biscuits.php";
+            enableBiscuit($_GET['id']);
             break;
         default :
             require "controler/navigation.php";

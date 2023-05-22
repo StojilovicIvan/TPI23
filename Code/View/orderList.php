@@ -8,45 +8,45 @@ ob_start();
 <div>
     <div class="order-list">
         <ul>
-            <li class="orderListTitre">Image</li>
-            <li class="orderListTitre">Nom</li>
-            <li class="orderListTitre">Quantité</li>
-            <li class="orderListTitre">Prix</li>
-            <li class="orderListTitre">QT</li>
-            <li class="orderListTitre">||</li>
+            <li class="order-style-title">Image</li>
+            <li class="order-style-title">Nom</li>
+            <li class="order-style-title">Quantité</li>
+            <li class="order-style-title">Prix</li>
+            <li class="order-style-title">QT</li>
+            <li class="order-style-title">||</li>
         </ul>
     </div>
     <?php foreach ($orders as $order) : ?>
         <div class="order-list">
             <?php if($id != null && $order['id'] == $id) : ?>
             <ul>
-                <li class="orderList"><img src="image\<?=$order['image']; ?>" width="40px"></li>
-                <li class="orderList"><?=$order['name']; ?></li>
-                <li class="orderList"><?=$order['quantity']; ?></li>
-                <li class="orderList"><?=$order['price']; ?></li>
-                <li class="orderList"><?=$order['totalQuantity']; ?></li>
-                <li class="orderList">||</li>
+                <li class="order-style"><img src="image\<?=$order['image']; ?>" width="40px"></li>
+                <li class="order-style"><?=$order['name']; ?></li>
+                <li class="order-style"><?=$order['quantity']; ?></li>
+                <li class="order-style"><?=$order['price']; ?></li>
+                <li class="order-style"><?=$order['totalQuantity']; ?></li>
+                <li class="order-style">||</li>
             </ul>
             <?php elseif($id != null && $order['id'] != $id) : ?>
                 <?php $id = $order['id']?>
                 <p>_____________________________________</p>
                 <ul>
-                    <li class="orderList"><img src="image\<?=$order['image']; ?>" width="40px"></li>
-                    <li class="orderList"><?=$order['name']; ?></li>
-                    <li class="orderList"><?=$order['quantity']; ?></li>
-                    <li class="orderList"><?=$order['price']; ?></li>
-                    <li class="orderList"><?=$order['totalQuantity']; ?></li>
-                    <li class="orderList">||</li>
+                    <li class="order-style"><img src="image\<?=$order['image']; ?>" width="40px"></li>
+                    <li class="order-style"><?=$order['name']; ?></li>
+                    <li class="order-style"><?=$order['quantity']; ?></li>
+                    <li class="order-style"><?=$order['price']; ?></li>
+                    <li class="order-style"><?=$order['totalQuantity']; ?></li>
+                    <li class="order-style">||</li>
                 </ul>
             <?php else :?>
                 <?php $id = $order['id']?>
                 <ul>
-                    <li class="orderList"><img src="image\<?=$order['image']; ?>" width="40px"></li>
-                    <li class="orderList"><?=$order['name']; ?></li>
-                    <li class="orderList"><?=$order['quantity']; ?></li>
-                    <li class="orderList"><?=$order['price']; ?></li>
-                    <li class="orderList"><?=$order['totalQuantity']; ?></li>
-                    <li class="orderList">||</li>
+                    <li class="order-style"><img src="image\<?=$order['image']; ?>" width="40px"></li>
+                    <li class="order-style"><?=$order['name']; ?></li>
+                    <li class="order-style"><?=$order['quantity']; ?></li>
+                    <li class="order-style"><?=$order['price']; ?></li>
+                    <li class="order-style"><?=$order['totalQuantity']; ?></li>
+                    <li class="order-style">||</li>
                 </ul>
             <?php endif; ?>
         </div>

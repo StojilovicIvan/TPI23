@@ -67,7 +67,17 @@ function modifyBiscuit($data){
     require "view/adminPage.php";
 }
 
-function deleteBiscuit(){
+function disableBiscuit($id){
+    require "model/biscuitManagement.php";
+    disableBiscuitDatabase($id);
+    $biscuits = databaseToAdmin();
+    require "view/adminPage.php";
+}
 
+function enableBiscuit($id){
+    require "model/biscuitManagement.php";
+    enableBiscuitDatabase($id);
+    $biscuits = databaseToAdmin();
+    require "view/adminPage.php";
 }
 
