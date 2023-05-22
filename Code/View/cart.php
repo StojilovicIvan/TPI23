@@ -48,7 +48,7 @@ else{
 
         <?php endforeach ; } ?>
     <div id="cartFooter">
-        <a href="">Prix total : <?=$total ?> CHF <button>Valider la commande</button></a>
+        <a href="index.php?action=validCart">Prix total : <?=$total ?> CHF <button>Valider la commande</button></a>
         <p></p>
     </div>
 <?php } ?>

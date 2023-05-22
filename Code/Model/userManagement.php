@@ -131,3 +131,16 @@ function userDetailToDatabase($data){
     $stmt->execute();
 
 }
+
+function databaseToOrder($id){
+    require_once "data/dbconnector.php";
+
+    $pdo = dbConnect();
+
+    $stmt =$pdo->query("SELECT orders.id AS id, orders.date AS date, biscuits.image AS image, biscuits.name AS name, biscuits.price AS price, orders.quantity AS quantity, orders_has_biscuits.quantity AS totalQuantity
+                                FROM orders_has_biscuits
+                                INNER JOIN biscuits ON biscuits_id = biscuits.id
+                                INNER JOIN orders ON orders_id = orders.id
+                                INNER JOIN users ON orders_users_id = users.id WHERE users.id = $id");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

@@ -27,7 +27,7 @@ ob_start();
         <?php endforeach; ?>
     </div>
     <a href="index.php?action=modifUserForm"><button>Modifier les informations</button></a><br><br>
-    <!--<a href="index.php?action=order"><button>Afficher mes commandes</button></a>-->
+    <a href="index.php?action=order&id=<?=$detail['id']; ?>"><button>Afficher mes commandes</button></a>
 </div>
 
 <?php

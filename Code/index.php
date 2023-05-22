@@ -55,7 +55,7 @@ if (isset($_GET['action'])) {
             break;
         case 'order' :
             require "controler/users.php";
-            order();
+            order($_GET['id']);
             break;
         case 'adminPage' :
             require "controler/users.php";

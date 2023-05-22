@@ -92,4 +92,20 @@
     font-size: 20px;
 }
 
+.order-list{
+    font-size: 20px;
+    text-align: center;
+}
+
+.orderList{
+    display: inline-block;
+    margin-right: 50px;
+    font-size: 20px;
+}
+.orderListTitre{
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 20px;
+}
+
 

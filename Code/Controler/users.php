@@ -36,7 +36,6 @@ function register($registerRequest){
         require "view/register.php";
     }
 
-
 }
 
 function login($loginRequest){
@@ -112,7 +111,9 @@ function modifUser($modifRequest){
     require "view/profil.php";
 }
 
-function order(){
+function order($id){
+    require "model/userManagement.php";
+    $orders = databaseToOrder($id);
     require "view/orderList.php";
 }
 
