@@ -5,7 +5,23 @@ $title = 'shop';
 ob_start();
 ?>
 <div class="margin">
+    <div id="filtre">
+        <ul>
+            <li></li>
+            <li onclick="biscuitFilter('Tous')">Tous</li>
+            <li onclick="biscuitFilter('Sucré')">Sucré</li>
+            <li onclick="biscuitFilter('Salé')">Salé</li>
+            <li onclick="biscuitFilter('Sans Gluten')">Sans Gluten</li>
+            <li onclick="biscuitFilter('Végan')">Végan</li>
+            <script>
+                function biscuitFilter(filter){
+
+                }
+            </script>
+        </ul>
+    </div>
     <div id="biscuit" class="cookie-menu">
+
         <?php foreach ($biscuits as $biscuit) : ?>
         <div>
             <div id="left"><img src="image/cookie.jpg" width="250px"></div>

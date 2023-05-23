@@ -34,8 +34,18 @@ function addToCart(){
 
 }
 
-function validCart(){
-
+function validCart($data){
+    require "model/biscuitManagement.php";
+    require "model/userManagement.php";
+    $users = getUsers();
+    foreach ($users as $user){
+        if($user['email'] == $_SESSION['email']){
+            $id = $user['id'];
+            $type = $user['userTypes_id'];
+        }
+    }
+    cartToDatabase($data, $id, $type);
+    require "view/home.php";
 }
 
 function formBiscuit(){

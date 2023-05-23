@@ -39,7 +39,7 @@ if (isset($_GET['action'])) {
             break;
         case 'validCart' :
             require "controler/biscuits.php";
-            validCart();
+            validCart($_POST);
             break;
         case 'profil' :
             require "controler/users.php";

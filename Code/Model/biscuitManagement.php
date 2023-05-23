@@ -111,4 +111,36 @@ function enableBiscuitDatabase($id){
 
 }
 
+function cartToDatabase($data, $id, $type){
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+    $quantity = null;
+
+   foreach ($data['product_quantities'] as $prodData){
+       $quantity += $prodData;
+   }
+
+    $userID = $id;
+    $userType = $type;
+
+    $stmt =$pdo->prepare('INSERT INTO orders (quantity, date, users_id, users_userTypes_id)
+                        VALUES (:quantity, current_date, :userID, :userType)');
+
+    $stmt =$pdo->prepare('INSERT INTO orders_has_biscuits (orders_id, orders_users_id, orders_users_userTypes_id, biscuits_id, quantity)
+                        VALUES ()');
+
+    $stmt->bindParam(':quantity', $quantity);
+    $stmt->bindParam(':userID', $userID);
+    $stmt->bindParam(':userType', $userType);
+    $stmt->execute();
+}
+
+function selectBiscuitFilter(){
+
+
+
+}
+
 
