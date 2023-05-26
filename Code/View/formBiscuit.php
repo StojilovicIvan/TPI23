@@ -4,7 +4,7 @@ $title = 'formBiscuit';
 
 ob_start();
 ?>
-
+<?php $pageTitle = "Ajout d'un biscuit" ?>
 <div>
     <form action="index.php?action=addBiscuit" method="POST">
         <div>

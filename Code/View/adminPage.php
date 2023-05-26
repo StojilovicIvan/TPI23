@@ -4,6 +4,7 @@ $title = 'adminPage';
 
 ob_start();
 ?>
+<?php $pageTitle = "Administration" ?>
 <div>
     <div>
         <?php foreach ($biscuits as $biscuit) : ?>

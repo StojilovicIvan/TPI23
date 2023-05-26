@@ -4,7 +4,7 @@ $title = 'profil';
 
 ob_start();
 ?>
-
+<?php $pageTitle = "Modifier votre profil" ?>
 <div>
     <div>
         <h3>Modifier mes informations</h3>

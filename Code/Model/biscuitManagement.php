@@ -9,6 +9,15 @@ function databaseToShop(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function databaseToHome(){
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+    $stmt =$pdo->query("SELECT id, name, price, image FROM biscuits WHERE activ = 1 LIMIT 3");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function databaseToDetail(){
     require "data/dbConnector.php";
 
@@ -124,20 +133,73 @@ function cartToDatabase($data, $id, $type){
 
     $userID = $id;
     $userType = $type;
+    $totalPrice = $data['product_totalPrice'];
 
-    $stmt =$pdo->prepare('INSERT INTO orders (quantity, date, users_id, users_userTypes_id)
-                        VALUES (:quantity, current_date, :userID, :userType)');
-
-    $stmt =$pdo->prepare('INSERT INTO orders_has_biscuits (orders_id, orders_users_id, orders_users_userTypes_id, biscuits_id, quantity)
-                        VALUES ()');
+    $stmt =$pdo->prepare('INSERT INTO orders (quantity, date, users_id, users_userTypes_id, totalPrice)
+                        VALUES (:quantity, current_date, :userID, :userType, :totalPrice)');
 
     $stmt->bindParam(':quantity', $quantity);
     $stmt->bindParam(':userID', $userID);
     $stmt->bindParam(':userType', $userType);
+    $stmt->bindParam(':totalPrice', $totalPrice);
     $stmt->execute();
 }
 
+function selectOrder($data, $id, $type){
+
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+    $quantity = 3;
+    $userID = $id;
+    $userType = $type;
+    $totalPrice = $data['product_totalPrice'];
+
+    $stmt =$pdo->prepare("SELECT id
+                                FROM orders
+                                WHERE quantity = :quantity AND date = current_date AND users_id = :userID AND users_userTypes_id = :userType AND totalPrice = :totalPrice LIMIT 1");
+
+
+    $stmt->bindParam(':quantity', $quantity);
+    $stmt->bindParam(':userID', $userID);
+    $stmt->bindParam(':userType', $userType);
+    $stmt->bindParam(':totalPrice', $totalPrice);
+    $stmt->execute();
+
+    $result = $stmt->fetchColumn(0);
+    return $result;
+}
+
+function bicuitsToOrder($data, $id, $type, $order){
+
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+    $orderID = $order;
+    $userID = $id;
+    $userType = $type;
+
+    foreach ($data['product_ids'] as $key => $biscuitID){
+        $biscuitQuantity = $data['product_quantities'][$key];
+
+        $stmt =$pdo->prepare('INSERT INTO orders_has_biscuits (orders_id, orders_users_id, orders_users_userTypes_id, biscuits_id, quantity) 
+                                VALUES (:orderID, :userID, :userType, :biscuitID, :biscuitQuantity)');
+
+
+        $stmt->bindParam(':orderID', $orderID);
+        $stmt->bindParam(':userID', $userID);
+        $stmt->bindParam(':userType', $userType);
+        $stmt->bindParam(':biscuitID', $biscuitID);
+        $stmt->bindParam(':biscuitQuantity', $biscuitQuantity);
+        $stmt->execute();
+    }
+
+}
+
 function selectBiscuitFilter(){
+
 
 
 

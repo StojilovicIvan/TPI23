@@ -4,7 +4,7 @@ $title = 'profil';
 
 ob_start();
 ?>
-
+<?php $pageTitle = "Profil" ?>
 <div id="profil">
     <div>
         <h3>Informations pesonnelles</h3>

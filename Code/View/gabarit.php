@@ -122,7 +122,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p>E-Biscuits</p>
-                    <h1>Shop</h1>
+                    <h1><?=$pageTitle ?></h1>
                 </div>
             </div>
         </div>
@@ -151,7 +151,21 @@
                     <ul>
                         <li>Avenue de la Gare 14,<br> 1450 Sainte-Croix</li>
                         <li>support@ebiscuits.com</li>
-                        <li>+41 78 152 48 36</li>
+                        <li>+41 79 123 45 67</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-box get-in-touch">
+                    <h2 class="widget-title">Nos réseaux</h2>
+                    <ul>
+                        <li>Instagram</li>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>LinkedIn</li>
+                        <li>Pinterest</li>
+                        <li>YouTube</li>
+                        <li>TikTok</li>
                     </ul>
                 </div>
             </div>

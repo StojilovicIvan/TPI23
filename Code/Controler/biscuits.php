@@ -45,6 +45,8 @@ function validCart($data){
         }
     }
     cartToDatabase($data, $id, $type);
+    $order = selectOrder($data, $id, $type);
+    bicuitsToOrder($data, $id, $type, $order);
     require "view/home.php";
 }
 

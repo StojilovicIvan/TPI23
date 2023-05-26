@@ -4,8 +4,11 @@ $title = 'cart';
 
 ob_start();
 ?>
-
+<?php $pageTitle = "Panier" ?>
 <div>
+    <?php if($emptyCart == null) :?>
+        <p>Panier vide</p>
+    <?php else : ?>
     <form action="index.php?action=validCart" method="POST">
         <?php foreach($produits as $produit): ?>
         <div id="cart-list">
@@ -22,8 +25,9 @@ ob_start();
                 <?php $total += $produit['price'] * $produit['quantity'] ?>
             </ul>
         </div>
-            <input type="hidden" name="product_ids[]" value="<?=$id?>">
+            <input type="hidden" name="product_ids[]" value="<?=$produit['id']?>">
             <input type="hidden" name="product_quantities[]" value="<?=$produit['quantity']?>">
+            <input type="hidden" name="product_totalPrice" value="<?=$total?>">
         <?php endforeach ; ?>
         <div id="cart-footer">
             <p>Prix total : <?=$total ?> CHF </p>
@@ -31,6 +35,7 @@ ob_start();
             <p></p>
         </div>
     </form>
+    <?php endif; ?>
 </div>
 
 <?php

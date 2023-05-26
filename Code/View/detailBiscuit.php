@@ -4,6 +4,7 @@ $title = 'detailBiscuit';
 
 ob_start();
 ?>
+<?php $pageTitle = "Boutique" ?>
 <div class="detail">
     <div class="detail-grid">
         <div id="detailImg">

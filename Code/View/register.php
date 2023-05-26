@@ -4,7 +4,7 @@ $title = 'register';
 
 ob_start();
 ?>
-
+<?php $pageTitle = "Inscription" ?>
 <div id="form-register">
     <div>
         <h2>Inscription</h2>

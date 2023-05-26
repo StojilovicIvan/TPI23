@@ -4,7 +4,7 @@ $title = 'login';
 
 ob_start();
 ?>
-
+<?php $pageTitle = "Connexion" ?>
 <div id="form-login">
     <div>
         <h2>Connexion</h2>

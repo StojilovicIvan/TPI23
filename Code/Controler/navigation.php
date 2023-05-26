@@ -2,7 +2,7 @@
 
 function home(){
     require "model/biscuitManagement.php";
-    $biscuits = databaseToShop();
+    $biscuits = databaseToHome();
     require "view/home.php";
 }
 
@@ -14,9 +14,10 @@ function shop(){
 
 function cart(){
     if(!isset($_SESSION['panier'])){
-        echo "Le panier est vide";
+        $emptyCart = null;
     }
     else {
+        $emptyCart = 1;
         $ids = array_keys($_SESSION['panier']);
         if (empty($ids)) {
             echo "Votre panier est vide";
@@ -27,7 +28,7 @@ function cart(){
 
             $produits = array();
             foreach ($ids as $id) {
-                $stmt = $pdo->prepare("SELECT name, price FROM biscuits WHERE id = :id");
+                $stmt = $pdo->prepare("SELECT id, name, price FROM biscuits WHERE id = :id");
                 $stmt->bindParam(':id', $id);
                 $stmt->execute();
                 $produit = $stmt->fetch(PDO::FETCH_ASSOC);

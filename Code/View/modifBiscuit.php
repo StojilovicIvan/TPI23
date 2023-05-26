@@ -4,7 +4,7 @@ $title = 'modifBiscuit';
 
 ob_start();
 ?>
-
+<?php $pageTitle = "Modifier un biscuit" ?>
 <div>
     <div>
         <form action="index.php?action=modifyBiscuit" method="POST">

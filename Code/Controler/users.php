@@ -49,6 +49,8 @@ function login($loginRequest){
             if (isLoginCorrect($userEmail, $userPassword)) {
                 $loginErrorMessage = null;
                 $_SESSION['email'] = $userEmail;
+                require "model/biscuitManagement.php";
+                $biscuits = databaseToHome();
                 require "view/home.php";
             }
             else {

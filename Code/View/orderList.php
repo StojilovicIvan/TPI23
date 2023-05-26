@@ -4,6 +4,7 @@ $title = 'orderList';
 
 ob_start();
 ?>
+<?php $pageTitle = "Listes de commandes" ?>
 <?php $id=null; ?>
 <div>
     <div class="order-list">
