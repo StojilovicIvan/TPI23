@@ -7,44 +7,54 @@ ob_start();
 <?php $pageTitle = "Boutique" ?>
 <div class="margin">
     <div id="filtre">
-        <form>
+        <form action="../index.php?action=filter" method="post">
             <div>
-                <label>Filtre</label>
+                <h3>Filtre</h3>
             </div>
             <div>
-                <label for="allBiscuits">Tout afficher</label>
-                <input type="checkbox" id="allBiscuits" name="allBiscuits" value="allBiscuits">
+                <label>
+                    <input type="radio" name="filter" value="all" <?php if($filtre == "all" || $filtre == null) : ?>  checked <?php endif; ?>> Tous les produits
+                </label>
             </div>
             <div>
-                <label for="sweet">Sucré</label>
-                <input type="checkbox" id="sweet" name="sweet" value="sweet">
+                <label>
+                    <input type="radio" name="filter" value="1" <?php if($filtre == "1") : ?>  checked <?php endif; ?> > Sucré
+                </label>
             </div>
             <div>
-                <label for="salt">Salé</label>
-                <input type="checkbox" id="salt" name="salt" value="salt">
+                <label>
+                    <input type="radio" name="filter" value="2" <?php if($filtre == "2") : ?>  checked <?php endif; ?> > Salé
+                </label>
             </div>
             <div>
-                <label for="glutenfree">Sans Gluten</label>
-                <input type="checkbox" id="glutenfree" name="glutenfree" value="glutenfree">
+                <label>
+                    <input type="radio" name="filter" value="3" <?php if($filtre == "3") : ?>  checked <?php endif; ?> > Sans gluten
+                </label>
             </div>
             <div>
-                <label for="vegan">Végan</label>
-                <input type="checkbox" id="vegan" name="vegan" value="vegan">
+                <label>
+                    <input type="radio" name="filter" value="4" <?php if($filtre == "4") : ?>  checked <?php endif; ?> > Végan
+                </label>
             </div>
+            <button type="submit">Afficher les biscuits</button>
         </form>
     </div>
     <div id="shop">
 
-        <?php foreach ($biscuits as $biscuit) : ?>
-        <div>
-            <div><img src="image/cookie.jpg" width="250px"></div>
-            <div><tr>
-                    <td><h3><strong><?=$biscuit['name']; ?></strong></h3></td>
-                    <td><h4><?=$biscuit['price']; ?> CHF</h4></td>
-                    <td><a href="index.php?action=detailBiscuit&id=<?=$biscuit['id']; ?>">Plus de détail</a></td>
-                </tr></div>
-        </div>
-        <?php endforeach; ?>
+            <?php foreach ($biscuits as $biscuit) : ?>
+            <div>
+                <div><img src="image\<?=$biscuit['image']; ?>" ></div>
+                <div><tr>
+                        <?php if($biscuit['weight'] != "Choix") : ?>
+                            <td><h3><?=$biscuit['name']; ?> <?=$biscuit['weight']; ?>g</h3></td>
+                        <?php else : ?>
+                            <td><h3><?=$biscuit['name']; ?></h3></td>
+                        <?php endif; ?>
+                        <td><h4><?=$biscuit['price']; ?> CHF</h4></td>
+                        <td><a href="index.php?action=detailBiscuit&id=<?=$biscuit['id']; ?>">Plus de détail</a></td>
+                    </tr></div>
+            </div>
+            <?php endforeach; ?>
     </div>
 </div>
 

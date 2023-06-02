@@ -13,7 +13,10 @@ function register($registerRequest){
                 require_once "model/userManagement.php";
                 if (registerAccount($registerRequest, $userEmail, $userPass)){
                     $_SESSION['email'] = $userEmail;
+                    $_SESSION['id'] = selectUserType($userEmail);
                     $registerErrorMessage = null;
+                    require "model/biscuitManagement.php";
+                    $biscuits = databaseToHome();
                     require "view/home.php";
                 }
                 else{
@@ -49,6 +52,7 @@ function login($loginRequest){
             if (isLoginCorrect($userEmail, $userPassword)) {
                 $loginErrorMessage = null;
                 $_SESSION['email'] = $userEmail;
+                $_SESSION['id'] = selectUserType($userEmail);
                 require "model/biscuitManagement.php";
                 $biscuits = databaseToHome();
                 require "view/home.php";
@@ -73,6 +77,8 @@ function logout()
 {
     $_SESSION = array();
     session_destroy();
+    require "model/biscuitManagement.php";
+    $biscuits = databaseToHome();
     require "view/home.php";
 }
 

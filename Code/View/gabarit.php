@@ -11,7 +11,7 @@
     <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
     <!-- title -->
-    <title>Shop</title>
+    <title><?=$pageTitle ?></title>
 
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
@@ -68,15 +68,19 @@
                             <li><a href="index.php?action=home">Home</a></li>
                             <li><a href="index.php?action=shop">Boutique</a></li>
                             <?php if(isset($_SESSION['email'])): ?>
-                                <li><a href="index.php?action=profil">Mon profil</a></li>
-                                <li><a href="index.php?action=logout">Déconnexion / <?= $_SESSION['email'] ?></a></li>
-                                <li><a href="index.php?action=adminPage">Administration</a></li>
-                                <li><a class="shopping-cart" href="index.php?action=cart"><i class="fas fa-shopping-cart"></i></a></li>
+                                <?php if($_SESSION['id']['userTypes_id'] == 2): ?>
+                                    <li><a href="index.php?action=profil">Mon profil</a></li>
+                                    <li><a href="index.php?action=logout">Déconnexion / <?= $_SESSION['email'] ?></a></li>
+                                    <li><a href="index.php?action=adminPage">Administration</a></li>
+                                <?php else : ?>
+                                    <li><a href="index.php?action=profil">Mon profil</a></li>
+                                    <li><a href="index.php?action=logout">Déconnexion / <?= $_SESSION['email'] ?></a></li>
+                                    <li><a class="shopping-cart" href="index.php?action=cart"><i class="fas fa-shopping-cart"></i></a></li>
+                                <?php endif; ?>
                             <?php elseif(!isset($_SESSION['email'])): ?>
                                 <li><a href="index.php?action=register">Inscription</a></li>
                                 <li><a href="index.php?action=login">Connexion</a></li>
                             <?php endif; ?>
-
                             <li>
                                 <div class="header-icons">
 
@@ -86,7 +90,6 @@
 
                         </ul>
                     </nav>
-                    <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                     <div class="mobile-menu"></div>
                     <!-- menu end -->
                 </div>

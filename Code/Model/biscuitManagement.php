@@ -1,29 +1,69 @@
 <?php
 
-function databaseToShop(){
-    require_once "data/dbConnector.php";
-
-    $pdo = dbConnect();
-
-    $stmt =$pdo->query("SELECT id, name, price, image FROM biscuits WHERE activ = 1");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 function databaseToHome(){
     require_once "data/dbConnector.php";
 
     $pdo = dbConnect();
 
-    $stmt =$pdo->query("SELECT id, name, price, image FROM biscuits WHERE activ = 1 LIMIT 3");
+    $stmt =$pdo->query('SELECT id, name, biscuits_has_packages.weight AS weight, price, image 
+                            FROM biscuits
+                            INNER JOIN biscuits_has_packages ON biscuits_has_packages.biscuits_id = biscuits.id
+                            WHERE activ = 1 LIMIT 4');
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-function databaseToDetail(){
-    require "data/dbConnector.php";
+function databaseToShop(){
+    require_once "data/dbConnector.php";
 
     $pdo = dbConnect();
 
-    $stmt =$pdo->query("SELECT id, name, price, energy, fat, carbohydrate, fiber, salt FROM biscuits");
+    $stmt =$pdo->query('SELECT id, name, biscuits_has_packages.weight AS weight, price, image 
+                            FROM biscuits 
+                            INNER JOIN biscuits_has_packages ON biscuits_has_packages.biscuits_id = biscuits.id 
+                            WHERE activ = 1');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function databaseToFilter($option){
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+    $type = $option['filter'];
+
+    $stmt =$pdo->prepare('SELECT biscuits.id, biscuits.name, biscuits_has_packages.weight AS weight, price, image 
+                                FROM biscuits 
+                                INNER JOIN biscuits_has_packages ON biscuits_has_packages.biscuits_id = biscuits.id 
+                                INNER JOIN biscuits_has_biscuitTypes ON biscuits.id = biscuits_has_biscuitTypes.biscuits_id
+                                INNER JOIN biscuitTypes ON biscuits_has_biscuitTypes.biscuitTypes_id = biscuitTypes.id
+                                WHERE activ = 1 AND biscuitTypes.id = :type');
+
+    $stmt->bindParam(':type', $type);
+    $stmt->execute();
+
+    return $stmt;
+}
+
+function databaseToDetail(){
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+    $stmt =$pdo->query('SELECT id, name, biscuits_has_packages.weight AS weight, price, stock, energy, fat, carbohydrate, fiber, salt
+                            FROM biscuits
+                            INNER JOIN biscuits_has_packages ON biscuits_has_packages.biscuits_id = biscuits.id');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function biscuitAllergy($id){
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+
+    $stmt =$pdo->query("SELECT allergy.name FROM allergy
+                            INNER JOIN allergy_has_biscuits ON allergy_has_biscuits.allergy_id = allergy.id
+                            INNER JOIN biscuits ON biscuits.id = allergy_has_biscuits.biscuits_id
+                            WHERE biscuits.id = $id");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -32,7 +72,7 @@ function databaseToAdmin(){
 
     $pdo = dbConnect();
 
-    $stmt =$pdo->query("SELECT id, name, price, image, energy, fat, carbohydrate, fiber, salt, activ FROM biscuits");
+    $stmt =$pdo->query("SELECT id, name, price, image, energy, fat, carbohydrate, fiber, salt, activ, stock FROM biscuits");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -135,7 +175,7 @@ function cartToDatabase($data, $id, $type){
     $userType = $type;
     $totalPrice = $data['product_totalPrice'];
 
-    $stmt =$pdo->prepare('INSERT INTO orders (quantity, date, users_id, users_userTypes_id, totalPrice)
+    $stmt =$pdo->prepare('INSERT INTO orders (totalQuantity, date, users_id, users_userTypes_id, totalPrice)
                         VALUES (:quantity, current_date, :userID, :userType, :totalPrice)');
 
     $stmt->bindParam(':quantity', $quantity);
@@ -143,49 +183,18 @@ function cartToDatabase($data, $id, $type){
     $stmt->bindParam(':userType', $userType);
     $stmt->bindParam(':totalPrice', $totalPrice);
     $stmt->execute();
-}
 
-function selectOrder($data, $id, $type){
+    $order_id = $pdo->lastInsertId();
 
-    require_once "data/dbConnector.php";
-
-    $pdo = dbConnect();
-
-    $quantity = 3;
-    $userID = $id;
-    $userType = $type;
-    $totalPrice = $data['product_totalPrice'];
-
-    $stmt =$pdo->prepare("SELECT id
-                                FROM orders
-                                WHERE quantity = :quantity AND date = current_date AND users_id = :userID AND users_userTypes_id = :userType AND totalPrice = :totalPrice LIMIT 1");
-
-
-    $stmt->bindParam(':quantity', $quantity);
-    $stmt->bindParam(':userID', $userID);
-    $stmt->bindParam(':userType', $userType);
-    $stmt->bindParam(':totalPrice', $totalPrice);
-    $stmt->execute();
-
-    $result = $stmt->fetchColumn(0);
-    return $result;
-}
-
-function bicuitsToOrder($data, $id, $type, $order){
-
-    require_once "data/dbConnector.php";
-
-    $pdo = dbConnect();
-
-    $orderID = $order;
+    $orderID = $order_id;
     $userID = $id;
     $userType = $type;
 
     foreach ($data['product_ids'] as $key => $biscuitID){
         $biscuitQuantity = $data['product_quantities'][$key];
 
-        $stmt =$pdo->prepare('INSERT INTO orders_has_biscuits (orders_id, orders_users_id, orders_users_userTypes_id, biscuits_id, quantity) 
-                                VALUES (:orderID, :userID, :userType, :biscuitID, :biscuitQuantity)');
+        $stmt =$pdo->prepare('INSERT INTO orders_has_biscuits (orders_id, orders_users_id, orders_users_userTypes_id, biscuits_id, weight, quantity) 
+                                VALUES (:orderID, :userID, :userType, :biscuitID, 500, :biscuitQuantity)');
 
 
         $stmt->bindParam(':orderID', $orderID);
@@ -195,12 +204,6 @@ function bicuitsToOrder($data, $id, $type, $order){
         $stmt->bindParam(':biscuitQuantity', $biscuitQuantity);
         $stmt->execute();
     }
-
-}
-
-function selectBiscuitFilter(){
-
-
 
 
 }

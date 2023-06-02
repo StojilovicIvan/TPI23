@@ -7,7 +7,7 @@ ob_start();
 <?php $pageTitle = "Modifier un biscuit" ?>
 <div>
     <div>
-        <form action="index.php?action=modifyBiscuit" method="POST">
+        <form id="modif-biscuit" action="index.php?action=modifyBiscuit" method="POST">
             <div>
                 <input type="hidden" id="id" name="id" value="<?=$biscuit['id']; ?>">
             </div>
@@ -42,6 +42,10 @@ ob_start();
             <div>
                 <label for="image">Lien de l'image*</label>
                 <input class="input" type="text" id="image" name="image" value="<?=$biscuit['image']; ?>" required>
+            </div>
+            <div>
+                <label for="stock">Stock*</label>
+                <input class="input" type="number" id="stock" name="stock" value="<?=$biscuit['stock']; ?>" required>
             </div>
             <div>
                 <button class="button" type="submit">Modifier le biscuit</button>

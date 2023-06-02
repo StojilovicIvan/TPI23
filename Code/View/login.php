@@ -21,7 +21,7 @@ ob_start();
             </div>
             <div>
                 <?=$loginErrorMessage?>
-            </div>
+            </div><br>
             <div>
                 <button class="button" type="submit">Se connecter</button>
             </div>

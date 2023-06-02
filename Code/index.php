@@ -85,6 +85,22 @@ if (isset($_GET['action'])) {
             require "controler/biscuits.php";
             enableBiscuit($_GET['id']);
             break;
+        case 'increaseQuantity' :
+            require "controler/biscuits.php";
+            increaseQuantity($_GET['id']);
+            break;
+        case 'decreaseQuantity' :
+            require "controler/biscuits.php";
+            decreaseQuantity($_GET['id']);
+            break;
+        case 'deleteBiscuit' :
+            require "controler/biscuits.php";
+            deleteBiscuit($_GET['id']);
+            break;
+        case 'filter' :
+            require "controler/navigation.php";
+            filter($_POST);
+            break;
         default :
             require "controler/navigation.php";
             lost();

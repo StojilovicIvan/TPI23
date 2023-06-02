@@ -5,7 +5,7 @@ $title = 'profil';
 ob_start();
 ?>
 <?php $pageTitle = "Modifier votre profil" ?>
-<div>
+<div id="modif-profil">
     <div>
         <h3>Modifier mes informations</h3>
     </div>
@@ -21,7 +21,7 @@ ob_start();
             </div>
             <div>
                 <label for="phoneNumber">Numéro de téléphone</label><br>
-                <input class="phoneNumber" type="number" id="phoneNumber" name="phoneNumber" value="<?=$detail['phoneNumber']; ?>">
+                <input class="input" type="text" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" value="<?=$detail['phoneNumber']; ?>">
             </div>
             <div>
                 <label for="street">Rue</label><br>
@@ -29,16 +29,16 @@ ob_start();
             </div>
             <div>
                 <label for="number">Numéro</label><br>
-                <input class="input" type="texte" id="number" name="number" value="<?=$detail['number']; ?>">
+                <input class="input" type="text" id="number" name="number" value="<?=$detail['number']; ?>">
             </div>
             <div>
                 <label for="postalCode">Code postal</label><br>
-                <input class="postalCode" type="number" id="postalCode" name="postalCode" value="<?=$detail['postalCode']; ?>">
+                <input class="input" type="text" id="postalCode" name="postalCode" pattern="[0-9]{4}" value="<?=$detail['postalCode']; ?>">
             </div>
             <div>
                 <label for="city">Ville</label><br>
-                <input class="city" type="text" id="city" name="city" value="<?=$detail['city']; ?>">
-            </div>
+                <input class="input" type="text" id="city" name="city" value="<?=$detail['city']; ?>">
+            </div><br>
             <div>
                 <button class="button" type="submit">Confirmer les modifications</button>
             </div>

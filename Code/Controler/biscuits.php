@@ -7,6 +7,7 @@ function detailBiscuit($id){
     foreach ($details as $detailLister) {
         if ($detailLister['id'] == $id){
             $detail = $detailLister;
+            $allergies = biscuitAllergy($detail['id']);
         }
     }
 
@@ -45,8 +46,8 @@ function validCart($data){
         }
     }
     cartToDatabase($data, $id, $type);
-    $order = selectOrder($data, $id, $type);
-    bicuitsToOrder($data, $id, $type, $order);
+    unset($_SESSION['panier']);
+    $biscuits = databaseToShop();
     require "view/home.php";
 }
 
@@ -91,5 +92,52 @@ function enableBiscuit($id){
     enableBiscuitDatabase($id);
     $biscuits = databaseToAdmin();
     require "view/adminPage.php";
+}
+
+function increaseQuantity($id){
+
+    foreach ($_SESSION['panier'] as $key => $quantity) {
+        if ($key == $id) {
+            $_SESSION['panier'][$key]++;
+
+            break;
+        }
+    }
+    require "controler/navigation.php";
+    cart();
+    require "view/cart.php";
+
+}
+
+function decreaseQuantity($id){
+
+    foreach ($_SESSION['panier'] as $key => $quantity) {
+        if ($key == $id) {
+            $_SESSION['panier'][$key]--;
+            if($_SESSION['panier'][$id] <= 0){
+                unset($_SESSION['panier'][$id]);
+            }
+            break;
+        }
+    }
+    require "controler/navigation.php";
+    cart();
+    require "view/cart.php";
+
+}
+
+function deleteBiscuit($id){
+
+    foreach ($_SESSION['panier'] as $key => $quantity) {
+        if ($key == $id) {
+            unset($_SESSION['panier'][$id]);
+            break;
+        }
+    }
+
+    require "controler/navigation.php";
+    cart();
+    require "view/cart.php";
+
 }
 

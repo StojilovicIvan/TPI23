@@ -1,7 +1,7 @@
 <?php
 
 function getUsers(){
-    require_once "data/dbconnector.php";
+    require_once "data/dbConnector.php";
 
     $pdo = dbConnect();
 
@@ -10,7 +10,7 @@ function getUsers(){
 }
 
 function getAllergies($id){
-    require_once "data/dbconnector.php";
+    require_once "data/dbConnector.php";
 
     $pdo = dbConnect();
 
@@ -23,8 +23,24 @@ function getAllergies($id){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function selectUserType($userEmail){
+    require_once "data/dbConnector.php";
+
+    $pdo = dbConnect();
+
+    $email = $userEmail;
+
+    $stmt =$pdo->prepare("SELECT userTypes_id 
+                            FROM users
+                            WHERE email = :email");
+    $stmt->execute(['email' => $email]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
 function addUser($data){
-    require_once "data/dbconnector.php";
+    require_once "data/dbConnector.php";
 
     $pdo = dbConnect();
 
@@ -51,6 +67,20 @@ function addUser($data){
     $stmt->bindParam(':password', $password);
     $stmt->bindParam(':phoneNumber', $phoneNumber);
     $stmt->execute();
+
+
+    $user_id = $pdo->lastInsertId();
+
+    foreach ($data['allergies'] as $allergy){
+        $userAllergy = $allergy;
+
+        $stmt =$pdo->prepare('INSERT INTO users_has_allergy (users_id, users_userTypes_id, allergy_id) 
+                                VALUES (:user_id, 1, :userAllergy)');
+
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':userAllergy', $userAllergy);
+        $stmt->execute();
+    }
 
 }
 
@@ -103,7 +133,7 @@ function isLoginCorrect($userEmail, $userPassword){
 
 function userDetailToDatabase($data){
 
-    require_once "data/dbconnector.php";
+    require_once "data/dbConnector.php";
 
     $pdo = dbConnect();
 
@@ -133,11 +163,11 @@ function userDetailToDatabase($data){
 }
 
 function databaseToOrder($id){
-    require_once "data/dbconnector.php";
+    require_once "data/dbConnector.php";
 
     $pdo = dbConnect();
 
-    $stmt =$pdo->query("SELECT orders.id AS id, orders.date AS date, biscuits.image AS image, biscuits.name AS name, biscuits.price AS price, orders.quantity AS quantity, orders_has_biscuits.quantity AS totalQuantity
+    $stmt =$pdo->query("SELECT orders.id AS id, orders.date AS date, biscuits.image AS image, biscuits.name AS name, biscuits.price AS price, orders.totalQuantity AS quantity, orders.totalPrice AS totalPrice, orders_has_biscuits.quantity AS totalQuantity
                                 FROM orders_has_biscuits
                                 INNER JOIN biscuits ON biscuits_id = biscuits.id
                                 INNER JOIN orders ON orders_id = orders.id
